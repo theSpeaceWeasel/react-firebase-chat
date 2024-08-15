@@ -1,5 +1,6 @@
 import { useState } from "react"
 import "./login.css"
+import { toast } from "react-toastify"
 
 const Login = () => {
     const [avatar, setAvatar] = useState({
@@ -12,14 +13,27 @@ const Login = () => {
             setAvatar({ file, url: URL.createObjectURL(file) });
         }
     }
+    const handleLogin = (e) => {
+        e.preventDefault();
+        // const formData = new FormData();
+        // formData.append('file', avatar.file);
+        // formData.append('username', 'username');
+        // formData.append('password', 'password');
+        // fetch('http://localhost:3000/login', {
+        //     method: 'POST',
+        //     body: formData
+        // })
+
+        toast.warn("hzllo")
+    }
     return (
         <div className="login">
             <div className="item">
                 <h2>Welcome back</h2>
-                <form>
+                <form onSubmit={handleLogin}>
                     <input type="text" placeholder="Email" name="email" required />
                     <input type="password" placeholder="Password" name="password" required />
-                    <button >Sign In</button>
+                    <button type="submit">Sign In</button>
                 </form>
             </div>
             <div className="separator"></div>
