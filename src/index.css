@@ -24,3 +24,11 @@ body {
   display: flex;
   color: blanchedalmond;
 }
+
+.loading {
+  padding: 50px;
+  font-size: 36px;
+  border-radius: 10px;
+  color: blanchedalmond;
+  background-color: rgba(54, 33, 146, 0.74);
+}
