@@ -31,6 +31,8 @@ const Login = () => {
             await signInWithEmailAndPassword(auth, email, password)
         } catch (error) {
             toast.error(error.message)
+        } finally {
+            setLoading(false)
         }
 
 
