@@ -22,3 +22,15 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# Docker related
+Dockerfile
+.dockerignore
+docker-compose.yml
+
+# Environment variables
+.env
+.env.*
+
+# Build directories and files
+build
