@@ -5,38 +5,38 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "fire
 import { auth, db } from "../../lib/firebase"
 import { setDoc, doc } from "firebase/firestore"
 import upload from "../../lib/upload"
+import { useUserStore } from "../../lib/userStore"
+
 const Login = () => {
     const [avatar, setAvatar] = useState({
         file: null,
         url: ""
     })
     const [loading, setLoading] = useState(false)
+    const { fetchUserInfo } = useUserStore()
+
     const handleAvatar = (e) => {
         const file = e.target.files[0];
         if (file) {
             setAvatar({ file, url: URL.createObjectURL(file) });
         }
     }
+
     const handleLogin = async (e) => {
         e.preventDefault();
         setLoading(true)
-        // const formData = new FormData();
-        // formData.append('file', avatar.file);
-        // formData.append('username', 'username');
-        // formData.append('password', 'password');
         const formData = new FormData(e.target);
         const { email, password } = Object.fromEntries(formData)
 
         try {
-            await signInWithEmailAndPassword(auth, email, password)
+            const userCredential = await signInWithEmailAndPassword(auth, email, password)
+            await fetchUserInfo(userCredential.user.uid)
+            toast.success("Successfully logged in!")
         } catch (error) {
             toast.error(error.message)
         } finally {
             setLoading(false)
         }
-
-
-        toast.warn("hzllo")
     }
 
     const handleRegister = async (e) => {
